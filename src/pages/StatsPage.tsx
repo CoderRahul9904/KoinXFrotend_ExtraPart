@@ -1,21 +1,28 @@
 import React, { useState } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import axios from 'axios';
+
+interface CryptoData {
+    _id: string;
+    coinType: string;
+    price: number;
+    marketCap: number;
+    change24h: number;
+    timestamp: string;
+    __v: number;
+  }
 
 const StatsPage = () => {
   const [coin, setCoin] = useState('');
-  const [stats, setStats] = useState(true);
-  const [deviation, setDeviation] = useState(null);
+  const [stats, setStats] = useState<CryptoData | null>(null);
 
   const handleFetchStats = async () => {
     try {
-      const statsResponse = await fetch(`/stats?coin=${coin}`);
-      const statsData = await statsResponse.json();
-      setStats(statsData);
-
-      const deviationResponse = await fetch(`/deviation?coin=${coin}`);
-      const deviationData = await deviationResponse.json();
-      setDeviation(deviationData);
+      
+        const statsResponse = await axios.get('http://localhost:3000/koinx/api/v1/stats',{params:{coinType:coin}})
+        setStats(statsResponse.data);
+      
     } catch (error) {
       console.error('Error fetching stats:', error);
     }
@@ -36,7 +43,7 @@ const StatsPage = () => {
           <option value="">Select Cryptocurrency</option>
           <option value="bitcoin">Bitcoin</option>
           <option value="ethereum">Ethereum</option>
-          <option value="matic">Matic</option>
+          <option value="matic-network">Matic-Network</option>
         </select>
         <button
           onClick={handleFetchStats}
@@ -47,21 +54,12 @@ const StatsPage = () => {
         {stats && (
           <div className="bg-white shadow-md p-6 rounded-md w-full md:w-2/3">
             <h2 className="text-2xl font-bold mb-4">Latest Stats for {coin}</h2>
-            {/* <p>Price: ${stats.price}</p>
-            <p>Market Cap: ${stats.marketCap}</p>
-            <p>24h Change: {stats['24hChange']}%</p> */}
-            <p>Price: X</p>
-            <p>Market Cap: y</p>
-            <p>24h Change: z</p>
+            <p>Price: {stats.price}</p>
+            <p>Market Cap: {stats.marketCap}</p>
+            <p>24h Change: {stats['change24h']}%</p>
           </div>
         )}
-        {deviation && (
-          <div className="bg-white shadow-md p-6 rounded-md w-full md:w-2/3 mt-4">
-            <h2 className="text-2xl font-bold mb-4">Price Deviation</h2>
-            {/* <p>Standard Deviation: {deviation.deviation}</p> */}
-            <p>Standard Deviation: 4082.48</p>
-          </div>
-        )}
+        
       </div>
     </div>
     <Footer />
