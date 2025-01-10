@@ -16,7 +16,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Dashboard />} />
           <Route path="/stats" element={<StatsPage />} />
-          <Route path="/coin" element={<CoinDetails coin={2} />} />
+          <Route path="/coin" element={<CoinDetails  />} />
         </Routes>
       </BrowserRouter>
     </>
