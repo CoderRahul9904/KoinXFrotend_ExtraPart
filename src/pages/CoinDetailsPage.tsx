@@ -27,7 +27,7 @@ const CoinDetails = () => {
 
     const handleFetchStats = async () => {
         try {
-            const statsResponse = await axios.get('http://localhost:3000/koinx/api/v1/stats',{params:{coinType:coin}})
+            const statsResponse = await axios.get('https://koin-xb-ackend-assignment-9a4snyf6b-coderrahul9904s-projects.vercel.app/koinx/api/v1/stats',{params:{coinType:coin}})
             setStats(statsResponse.data);
             setDeviation(null)
           } catch (error) {
@@ -37,7 +37,7 @@ const CoinDetails = () => {
 
     const fetchDeviation = async () => {
         try {
-            const deviatedResponse = await axios.get('http://localhost:3000/koinx/api/v1/deviation',{params:{coinType:coin}})
+            const deviatedResponse = await axios.get('https://koin-xb-ackend-assignment-9a4snyf6b-coderrahul9904s-projects.vercel.app/koinx/api/v1/deviation',{params:{coinType:coin}})
             setDeviation(deviatedResponse.data);
           } catch (error) {
             console.error('Error fetching stats:', error);
