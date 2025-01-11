@@ -19,8 +19,7 @@ const StatsPage = () => {
 
   const handleFetchStats = async () => {
     try {
-      
-        const statsResponse = await axios.get('http://localhost:3000/koinx/api/v1/stats',{params:{coinType:coin}})
+        const statsResponse = await axios.get('https://koin-xb-ackend-assignment-9a4snyf6b-coderrahul9904s-projects.vercel.app/koinx/api/v1/stats',{params:{coinType:coin}})
         setStats(statsResponse.data);
       
     } catch (error) {
