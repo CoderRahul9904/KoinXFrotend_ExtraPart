@@ -17,7 +17,7 @@ const Dashboard = () => {
     
         const handledashboardRequest=async()=>{
             try {
-                const statsResponse = await axios.get('http://localhost:3000/koinx/api/v1/dashboard')
+                const statsResponse = await axios.get('https://koin-xb-ackend-assignment-9a4snyf6b-coderrahul9904s-projects.vercel.app/koinx/api/v1/dashboard')
                 setStats(statsResponse.data);
               
             } catch (error) {
